@@ -1,0 +1,19 @@
+name: Deploy to deta.sh
+on:
+  push:
+    branches: [ "deploy" ]
+  pull_request:
+    branches: [ "deploy" ]
+  workflow_dispatch: ~
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: deploy ShortURL-main
+        uses: BogDAAAMN/deta-deploy-action@v1.0.1
+        with:
+          deta-access-token: ${{ secrets.DETA_TOKEN }} #Deta access token https://docs.deta.sh/docs/cli/auth
+          deta-name: 'ShortURL-main' #Deta Micro name https://docs.deta.sh/docs/cli/commands/#deta-clone
+          deta-project: ${{ secrets.DETA_PROJECT_NAME }} #Optional: Deta project name https://docs.deta.sh/docs/cli/commands/#deta-clone
+          deta-project-dir: 'micros/ShortURL-main' #Optional: directory to be deployed on Deta. Default is the root "." 
