@@ -20,18 +20,15 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v3
-
       - name: Create micro on Deta
         if: {{inputs.deploy_mode}} == "init"
-        uses: jhihyulin/deta-create-micro-action@publish
+        uses: jhihyulin/deta-create-micro-action@v1.0.0
         with:
           deta-access-token: ${{ secrets.DETA_TOKEN }} #Deta access token https://docs.deta.sh/docs/cli/auth
           deta-name: 'ShortURL-main' #Deta Micro name https://docs.deta.sh/docs/cli/commands/#deta-clone
           deta-project: ${{ secrets.DETA_PROJECT_NAME }} #Optional: Deta project name https://docs.deta.sh/docs/cli/commands/#deta-clone
           deta-project-dir: 'micros/ShortURL-main' #Optional: directory to be deployed on Deta. Default is the root "." 
           deta-python-version: 'python3.9'
-
-
       - name: deploy ShortURL-main
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
