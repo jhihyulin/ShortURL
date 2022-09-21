@@ -3,6 +3,25 @@ A simple Short URL service deploy on deta.sh with FastAPI
 
 This is a simple short url service, you can use it to shorten your long url.
 
+## How it works
+
+Create:
+
+```
+origin URL ─ encode(UTF-8) ─ MD5 hash ─ base62 encode ─ query database ┬ write database ─ return short URL
+                    │                                              Already exists ┬ Original URL same ┘
+                    │                                                    original URL NOT same
+                    └─────────────────────────────────────┘
+```
+
+Inquire:
+
+```
+short URL ─ query database ┬ return origin URL
+                         Not found
+                            └ raise HTTP404
+```
+
 ## Deploy
 
 step 1: fork this repositorities
