@@ -8,18 +8,21 @@ This is a simple short url service, you can use it to shorten your long url.
 Create:
 
 ```
-origin URL ─ encode(UTF-8) ─ MD5 hash ─ base62 encode ─ query database ┬ write database ─ return short URL
-                    │                                              Already exists ┬ Original URL same ┘
-                    │                                                    original URL NOT same
+origin URL → encode(UTF-8) → MD5 hash → base62 encode → query database ┬ write database → return short URL
+                    ↑                                                    ↓                          ↑
+                    │                                              already exists ┬ origin URL same ┘
+   use system timestamp as source material                                         ↓
+                    ↑                                                      origin URL NOT same
                     └─────────────────────────────────────┘
 ```
 
 Inquire:
 
 ```
-short URL ─ query database ┬ return origin URL
+short URL → query database ┬ return origin URL
+                            ↓
                          Not found
-                            └ raise HTTP404
+                            └→ raise HTTP404
 ```
 
 ## Deploy
