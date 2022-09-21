@@ -6,21 +6,24 @@ on:
     branches: [ "deploy" ]
   workflow_dispatch:
     inputs:
-      deploy_mode:
-        description: "Deploy mode"
-        required: true
-        default: "deploy"
-        type: choice
-        options:
-        - deploy
-        - init
+      init_mode:
+        description: 'init mode'
+        required: false
+        type: boolean
+#        description: "Deploy mode"
+#        required: true
+#        default: "deploy"
+#        type: choice
+#        options:
+#        - deploy
+#        - init
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: check out
         uses: actions/checkout@v3
-      - if: ${{ inputs.deploy_mode }} == 'init'
+      - if: ${{ inputs.init_mode }}
         name: Create micro on Deta
         uses: jhihyulin/deta-create-micro-action@v1.0.0
         with:
