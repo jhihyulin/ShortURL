@@ -93,14 +93,17 @@ step 9: ```deta deploy``` to deploy
 }
 ```
 
-response
+response```HTTP200```
 ```json
 {
     "url": "<your short url>"
 }
 ```
 
-```GET /<short url>``` to redirect to the long url 
+```GET /<short url>``` to redirect to the long url ```HTTP307```
+```python
+RedirectResponse(original_url)
+```
 
 ## Reference
 [Deploy FastAPI on Deta](https://fastapi.tiangolo.com/deployment/deta/)
