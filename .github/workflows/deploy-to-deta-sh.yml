@@ -10,13 +10,14 @@ on:
         description: 'init mode'
         required: false
         type: boolean
-#        description: "Deploy mode"
-#        required: true
-#        default: "deploy"
-#        type: choice
-#        options:
-#        - deploy
-#        - init
+#      update_env:
+#        description: 'update env'
+#        required: false
+#        type: boolean
+#      visor_enable:
+#        description: 'visor enable'
+#        required: false
+#        type: boolean
 jobs:
   deploy:
     runs-on: ubuntu-latest
