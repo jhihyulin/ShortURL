@@ -4,12 +4,32 @@ on:
     branches: [ "deploy" ]
   pull_request:
     branches: [ "deploy" ]
-  workflow_dispatch: ~
+  workflow_dispatch:
+    inputs:
+      deploy_mode:
+        description: "Deploy mode"
+        required: true
+        default: "deploy"
+        type: choice
+        options:
+        - deploy
+        - init
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Create micro on Deta
+        if: {{inputs.deploy_mode}} == "init"
+        uses: jhihyulin/deta-create-micro-action@publish
+        with:
+          deta-access-token: ${{ secrets.DETA_TOKEN }} #Deta access token https://docs.deta.sh/docs/cli/auth
+          deta-name: 'ShortURL-main' #Deta Micro name https://docs.deta.sh/docs/cli/commands/#deta-clone
+          deta-project: ${{ secrets.DETA_PROJECT_NAME }} #Optional: Deta project name https://docs.deta.sh/docs/cli/commands/#deta-clone
+          deta-project-dir: 'micros/ShortURL-main' #Optional: directory to be deployed on Deta. Default is the root "." 
+          deta-python-version: 'python3.9'
+
+
       - name: deploy ShortURL-main
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
