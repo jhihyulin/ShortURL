@@ -18,7 +18,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: check out
+        uses: actions/checkout@v3
+
       - name: Create micro on Deta
         if: {{inputs.deploy_mode}} == "init"
         uses: jhihyulin/deta-create-micro-action@publish
