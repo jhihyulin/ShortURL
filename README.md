@@ -100,7 +100,9 @@ response```HTTP200```
 }
 ```
 
-```GET /<short url>``` to redirect to the long url ```HTTP307```
+```GET /<short url>``` to redirect to the long url
+
+response```HTTP307```
 ```python
 RedirectResponse(original_url)
 ```
