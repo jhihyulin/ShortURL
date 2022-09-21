@@ -35,6 +35,8 @@ SERVER_PREFIX = "<your server prefix>"
 SERVER_PREFIX=<your server prefix>
 ```
 
+⚠️If you run on Deta Micro, you don't need to set ```PROJECTING_KEY```
+
 ### optional
 if you want develop on your local, you have some steps to do
 
@@ -50,7 +52,7 @@ step 5: ```pip install -r requirements.txt```
 
 step 6: ```deta login``` to login
 
-step 7: add the ```SERVER_PREFIX``` and ```DETA_TOKEN``` parameter to ```micros/ShortURL-main/.env```
+step 7: add the ```SERVER_PREFIX``` and ```PROJECTING_KEY``` parameter to ```micros/ShortURL-main/.env```
 
 ```env
 SERVER_PREFIX=<your server prefix>
