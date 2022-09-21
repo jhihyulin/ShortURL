@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v3
-      - if: ${{inputs.deploy_mode}} == "init"
+      - if: ${{ inputs.deploy_mode }} == "init"
         name: Create micro on Deta
         uses: jhihyulin/deta-create-micro-action@v1.0.0
         with:
