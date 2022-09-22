@@ -51,7 +51,7 @@ SERVER_PREFIX = os.getenv('SERVER_PREFIX')
 SERVER_PREFIX = "<your server prefix>"
 ```
 
-2. go to your repositorie, path to ```micros/ShortURL-main/.env``` and edit the ```SERVER_PREFIX``` parameter, then go to your repositorie's action page tick ```update env``` option and click ```Run workflow``` to redeploy⚠️Due to an unknown error, if you run it for the second time, the default key will be deleted, so please edit ```env``` then only do one update. If you need to do it again, go to deleteicro and init.
+2. go to your repositorie, path to ```micros/ShortURL-main/.env``` and edit the ```SERVER_PREFIX``` parameter, then go to your repositorie's action page tick ```update env``` option and click ```Run workflow``` to redeploy⚠️Due to an unknown error, if you run it for the second time, the default key will be deleted, so please edit ```env``` then only do one update. If you need to do it again, go to delete micro and reinit.
 
 ⚠️WARN! Never put any undisclosed key in ```.env``` on GitHub, E.g```PROJECTING_TOKEN```
 
