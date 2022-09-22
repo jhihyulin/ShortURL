@@ -9,7 +9,7 @@ from pydantic import BaseModel
 import hashlib
 import time
 from urllib.parse import urlunparse, urlparse
-from lib.base62 import Base62
+import lib.base62 as Base62
 # env
 import os
 from dotenv import load_dotenv
