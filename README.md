@@ -39,11 +39,11 @@ step 5: go to your repositorie's setting, add a new secret named ```DETA_PROJECT
 
 step 6: go to your repositorie's setting, add a new secret named ```DETA_TOKEN``` and set the value to the token you created in step 4
 
-step 7: go to your repositorie's action page click ```Run workflow``` to deploy
+step 7: go to your repositorie's action page tick ```init mode``` then click ```Run workflow``` to init micro
 
-step 8: because of we can't use github action to update ```.env``` file now, so we have two ways to set the ```SERVER_PREFIX``` parameter, you can use your custom domain or use the deta provided domain, you can find the default domain on https://web.deta.sh micros>ShortURL-main that visiable on the righttop of the page, about hoe to setup custom domain, you can find it on https://docs.deta.sh/docs/micros/custom_domains
+step 8: From now on we can GitHub actiion renew ```.env``` file, so we have two ways to set the ```SERVER_PREFIX``` parameter, you can use your custom domain or use the deta provided domain, find the default domain on https://web.deta.sh micros>ShortURL-main that visiable on the righttop of the page, about hoe to setup custom domain, you can find it on https://docs.deta.sh/docs/micros/custom_domains
 
-1. go to your repositorie, path to ```micros/ShortURL-main/main.py``` and edit the ```SERVER_PREFIX``` parameter inline 20, then go to your repositorie's action page click ```Run workflow``` to redeploy
+1. go to your repositorie, path to ```micros/ShortURL-main/main.py``` and edit the ```SERVER_PREFIX``` parameter inline 20, then go to your repositorie's action page tick ```deploy``` option and click ```Run workflow``` to redeploy
 ```python
 #original
 SERVER_PREFIX = os.getenv('SERVER_PREFIX')
@@ -51,15 +51,18 @@ SERVER_PREFIX = os.getenv('SERVER_PREFIX')
 SERVER_PREFIX = "<your server prefix>"
 ```
 
+2. go to your repositorie, path to ```micros/ShortURL-main/.env``` and edit the ```SERVER_PREFIX``` parameter, then go to your repositorie's action page tick ```update env``` option and click ```Run workflow``` to redeploy
 
-2. clone repositorities to your local, edit the ```SERVER_PREFIX``` parameter in ```micros/ShortURL-main/.env``` and use deta cli to update env
+⚠️WARN! Never put any undisclosed key in ```.env``` on GitHub, E.g```PROJECTING_TOKEN```
+
+3. clone repositorities to your local, edit the ```SERVER_PREFIX``` parameter in ```micros/ShortURL-main/.env``` and use deta cli to update env
 ```env
 SERVER_PREFIX=<your server prefix>
 ```
 
 ⚠️If you run on Deta Micro, you don't need to set ```PROJECTING_KEY```
 
-### optional
+### Local develop
 if you want develop on your local, you have some steps to do
 
 step 1: install python3.9 or higher
@@ -84,6 +87,12 @@ DETA_TOKEN=<your deta token>
 step 8: ```deta update -e .env``` to update env
 
 step 9: ```deta deploy``` to deploy
+
+### Visor
+Record the content of the request and its success on https://web.deta.sh > micros > visor
+step 1: go to your repositorie's action page tick ```visor enable``` and click ```Run workflow```
+
+step 2: Finish, visor is enable
 
 ## Usage
 ```POST /create``` to create a short url
