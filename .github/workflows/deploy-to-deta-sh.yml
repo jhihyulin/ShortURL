@@ -6,6 +6,10 @@ on:
     branches: [ "deploy" ]
   workflow_dispatch:
     inputs:
+      deploy:
+        description: 'deploy'
+        required: false
+        type: boolean
       init_mode:
         description: 'init mode'
         required: false
@@ -41,7 +45,8 @@ jobs:
           deta-name: 'ShortURL-main'
           deta-project: ${{ secrets.DETA_PROJECT_NAME }}
           deta-project-dir: 'micros/ShortURL-main'
-      - name: deploy ShortURL-main
+      - if: ${{ inputs.deploy }}
+        name: deploy ShortURL-main
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
           deta-access-token: ${{ secrets.DETA_TOKEN }} #Deta access token https://docs.deta.sh/docs/cli/auth
