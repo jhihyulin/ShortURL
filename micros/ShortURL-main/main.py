@@ -64,7 +64,7 @@ def shorten_request(data: Create_short_url):
     url_key = short(url)
     timestamp = time.time()
     timestring = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime())
-    if DB.get(url_key) == None:
+    if DB.get(url_key) is None:
         DB.put(
             {
                 "original_url": data.original_url,
@@ -75,7 +75,7 @@ def shorten_request(data: Create_short_url):
             }, url_key
         )
         return {"url": SERVER_PREFIX + url_key}
-    elif DB.get(url_key) != None and DB.get(url_key)["original_url"] != data.original_url:
+    elif DB.get(url_key) is not None and DB.get(url_key)["original_url"] != data.original_url:
         url_key = use_rand_key(url_key)
         DB.put(
             {
@@ -87,7 +87,7 @@ def shorten_request(data: Create_short_url):
             }, url_key
         )
         return {"url": SERVER_PREFIX + url_key}
-    elif DB.get(url_key) != None and DB.get(url_key)["original_url"] == data.original_url:
+    elif DB.get(url_key) is not None and DB.get(url_key)["original_url"] == data.original_url:
         return {"url": SERVER_PREFIX + url_key}
 
 
