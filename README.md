@@ -7,22 +7,41 @@ This is a simple short url service, you can use it to shorten your long url.
 
 Create:
 
-```
-origin URL → encode(UTF-8) → MD5 hash → base62 encode → query database ┬ write database → return short URL
-                    ↑                                                    ↓                          ↑
-                    │                                              already exists ┬ origin URL same ┘
-   use system timestamp as source material                                         ↓
-                    ↑                                                      origin URL NOT same
-                    └─────────────────────────────────────┘
+```mermaid
+graph TB
+    A[Input URL]
+    B[Check URL integrity]
+    C[Query database]
+    D[Return]
+    E[Inspector makes URL]
+    F[Raise HTTP400]
+    G[Use UTF-8 to encode]
+    H[Use base64 to encode]
+    I[Get MD5 hash]
+    J[Prefix the url]
+    K[Write to database]
+    L[Use timestamp as material]
+    A --> B
+    B --> |coomplete| G --> I --> H --> C
+    B --> |incomplete| F
+    C --> |no same key| K --> J --> D
+    C --> |have same key| E
+    E --> |Same as the original URL| D
+    E --> |The original URL is different| L --> G
 ```
 
 Inquire:
 
-```
-short URL → query database ┬ return origin URL
-                            ↓
-                         Not found
-                            └→ raise HTTP404
+```mermaid
+graph TD
+    A[Query database]
+    B[Inpur Short URL]
+    C[Return and jump to origin URL]
+    D[Raise HTTP404]
+    F[Count +1]
+    B --> A
+    A --> |Found| F --> C
+    A --> |Not Found| D
 ```
 
 ## Deploy
